@@ -1,0 +1,22 @@
+{
+  "name": "aggie-node-app",
+  "version": "1.0.0",
+  "description": "my first app using node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aggiewb/scc-advanced-js.git"
+  },
+  "author": "Aggie Wheeler Bateman",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/aggiewb/scc-advanced-js/issues"
+  },
+  "homepage": "https://github.com/aggiewb/scc-advanced-js#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
