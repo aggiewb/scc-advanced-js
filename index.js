@@ -7,6 +7,7 @@ http.createServer((request, response) => {
     const objectDescription = `<p>Total items in my data array is ${data().length}.</p><p>This is the contents of the array:</p>`
     const employeesListContents = data().map(employee => `<li>${JSON.stringify(employee)}</li>`);
     const aboutAuthor = '<h1>About me</h1><p>Let me tell you a little about myself! I am working towards a web development certificate from Seattle Central College, and I currently live in Seattle with my husband. I have experience in HTML, CSS, Python, JS, SQL, PHP, Django, and Java. In my off time, I really enjoy reading, being outside, and playing video and board games.<p>';
+    const error404 = '<h1>404 error</h1><p>Sorry! That page couldn\'t be found.</p>';
 
     const path = request.url.toLowerCase();
 
@@ -15,10 +16,12 @@ http.createServer((request, response) => {
         response.write(`${greeting}${appDescription}`);
         response.write(objectDescription);
         response.write(`<ul>${employeesListContents.join('')}</ul>`);
-        response.end();
     } else if(path === '/about'){
         response.writeHead(200, {'Content-type': 'text/html'});
         response.write(aboutAuthor);
-        response.end();
+    } else {
+        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.write(error404);
     }
+    response.end();
 }).listen(3000);
