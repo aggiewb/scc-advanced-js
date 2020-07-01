@@ -31,4 +31,4 @@ const getAll = () => [
     }
 ];
 
-module.exports = {getAll}; 
+module.exports = getAll; 
