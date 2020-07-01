@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/aggiewb/scc-advanced-js/issues"
   },
-  "homepage": "https://github.com/aggiewb/scc-advanced-js#readme"
+  "homepage": "https://github.com/aggiewb/scc-advanced-js#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
