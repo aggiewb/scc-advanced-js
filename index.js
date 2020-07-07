@@ -1,5 +1,9 @@
+'use strict'
 const data = require('./data.js');
-const http = require('http');
+const express = require('express');
+
+const app = express();
+app.set('port', process.env.PORT || 3000);
 
 http.createServer((request, response) => {
     const greeting = '<h1>Hi, my name is Aggie, and this is my first Node.js app!</h1>';
