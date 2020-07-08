@@ -18,7 +18,7 @@ app.get('/detail', (request, response) => {
 
 app.get('/about', (request, response) => {
     response.type('text/html');
-    response.send('<h1>About us</h1><p>We\'re a great company making webpages!</p>');
+    response.render('about');
 });
 
 app.get('/', (request, response) => {
