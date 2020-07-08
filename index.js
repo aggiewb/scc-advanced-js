@@ -13,7 +13,7 @@ app.use(express.static(`${__dirname}/public`));
 
 app.get('/detail', (request, response) => {
     let name = request.query.employee;
-    response.render('details', {details: data.getEmployee(name)});
+    response.render('details', {employee: name, details: data.getEmployee(name)});
 });
 
 app.get('/about', (request, response) => {
