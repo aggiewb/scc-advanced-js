@@ -1,5 +1,8 @@
 <h1>Best Websites Inc.</h1>
 <h2>Employees</h2>
-{{# each employees}}
-    <li><a href="detail?employee={{name}}">{{name}}</a></li>
-{{/each}}
+<ul>
+    {{# each employees}}
+        <li><a href="detail?employee={{name}}">{{name}}</a></li>
+    {{/each}}
+</ul>
+<a href="/about">About us</a>
