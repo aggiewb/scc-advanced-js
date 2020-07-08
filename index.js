@@ -1,13 +1,15 @@
-'use strict'
+'use strict';
 const express = require('express');
 const handlebars = require('express-handlebars');
 const data = require('./data.js');
 
 const app = express();
 app.set('port', 3000);
+app.listen(app.get('port'), () => console.log('Express server started'));
+
 app.engine('handlebars', handlebars({defaultLayout: false}));
 app.set('view engine', 'handlebars');
-app.listen(app.get('port'));
+app.use(express.static(`${__dirname}/public`));
 
 app.get('/detail', (request, response) => {
     let name = request.query.employee;
