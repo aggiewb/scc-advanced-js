@@ -1,10 +1,10 @@
 <h1>Employee Details</h1>
-<h2>{{employee}}</h2>
+{{#with details}}
+<h2>{{name}}</h2>
 <ul>
-    {{#with details}}
     <li>{{title}}</li>
     <li>{{years}} years</li>
     <li>${{salary}}</li>
-    {{/with}}
 </ul>
+{{/with}}
 <a href="/">Home</a>

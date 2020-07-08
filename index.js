@@ -11,7 +11,7 @@ app.listen(app.get('port'));
 
 app.get('/detail', (request, response) => {
     let name = request.query.employee;
-    response.render('details', {employee: name, details: data.getEmployee(name)});
+    response.render('details', {details: data.getEmployee(name)});
 });
 
 app.get('/about', (request, response) => {
