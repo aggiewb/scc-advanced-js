@@ -1,8 +1,17 @@
-<h1>Best Websites Inc.</h1>
-<h2>Employees</h2>
-<ul>
-    {{# each employees}}
-        <li><a href="detail?employee={{name}}">{{name}}</a></li>
-    {{/each}}
-</ul>
-<a href="/about">About us</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Overpass+Mono&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Best Websites Inc.</h1>
+        <h2>Employees</h2>
+        <ul>
+            {{# each employees}}
+                <li><a href="detail?employee={{name}}">{{name}}</a></li>
+            {{/each}}
+        </ul>
+        <a href="/about">About us</a>
+    </body>
+</html>

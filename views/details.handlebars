@@ -1,10 +1,19 @@
-<h1>Employee Details</h1>
-{{#with details}}
-<h2>{{name}}</h2>
-<ul>
-    <li>{{title}}</li>
-    <li>{{years}} years</li>
-    <li>${{salary}}</li>
-</ul>
-{{/with}}
-<a href="/">Home</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="css/style.css"/ rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Overpass+Mono&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Employee Details</h1>
+        {{#with details}}
+        <h2>{{name}}</h2>
+        <ul>
+            <li>{{title}}</li>
+            <li>{{years}} years</li>
+            <li>${{salary}}</li>
+        </ul>
+        {{/with}}
+        <a href="/">Home</a>
+    </body>
+</html>
