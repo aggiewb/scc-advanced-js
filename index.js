@@ -12,7 +12,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static(`${__dirname}/public`));
 
 app.get('/detail', (request, response) => {
-    let name = request.query.employee;
+    const name = request.query.employee;
     response.render('details', {employee: name, details: data.getEmployee(name)});
 });
 

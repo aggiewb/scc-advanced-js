@@ -40,7 +40,7 @@ const employees = [
 const getAll = () => employees;
 
 const getEmployee = name => {
-    let employee = employees.find(personObj => personObj.name === name);
+    const employee = employees.find(personObj => personObj.name === name);
     employee.salary = employee.salary.toLocaleString();
     return employee;
 }
