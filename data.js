@@ -1,34 +1,48 @@
-const getAll = () => [
+const employees = [
     {
-        employee: 'Aggie',
+        name: 'Aggie',
         title: 'Web Dev 1',
         years: 2,
         salary: 80000
     }, 
     {
-        employee: 'Steven',
-        title: 'Lead DevOps Developer',
+        name: 'Steven',
+        title: 'Web Dev Intern',
         years: 5,
-        salary: 150000
+        salary: 5000
     }, 
     {
-        employee: 'Sherman',
+        name: 'Sherman',
         title: 'Web Dev 2',
         years: 3,
         salary: 90000
     }, 
     {
-        employee: 'Evelynn',
+        name: 'Evelynn',
         title: 'Senior Developer',
         years: 8,
         salary: 200000
     }, 
     {
-        employee: 'Frank',
+        name: 'Frank',
         title: 'QA Engineer',
         years: 2,
         salary: 70000
+    },
+    {
+        name: 'Michelle',
+        title: 'Project Manager',
+        years: 2,
+        salary: 90000
     }
 ];
 
-module.exports = getAll; 
+const getAll = () => employees;
+
+const getEmployee = name => {
+    let employee = employees.find(personObj => personObj.name === name);
+    employee.salary = employee.salary.toLocaleString();
+    return employee;
+}
+
+module.exports = { getAll, getEmployee }; 
