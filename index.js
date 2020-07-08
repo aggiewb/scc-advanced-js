@@ -9,13 +9,18 @@ app.engine('handlebars', handlebars({defaultLayout: false}));
 app.set('view engine', 'handlebars');
 app.listen(app.get('port'));
 
+app.get('/detail', (request, response) => {
+    let name = request.query.employee;
+    response.render('details', {employee: name, details: data.getEmployee(name)});
+});
+
 app.get('/about', (request, response) => {
     response.type('text/html');
     response.send('About page');
 });
 
 app.get('/', (request, response) => {
-    response.render('home', {employees: data()});
+    response.render('home', {employees: data.getAll()});
 });
 
 app.use((request, response) => {
