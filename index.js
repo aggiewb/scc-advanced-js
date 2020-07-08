@@ -16,7 +16,7 @@ app.get('/detail', (request, response) => {
 
 app.get('/about', (request, response) => {
     response.type('text/html');
-    response.send('About page');
+    response.send('<h1>About us</h1><p>We\'re a great company making webpages!</p>');
 });
 
 app.get('/', (request, response) => {
@@ -26,5 +26,5 @@ app.get('/', (request, response) => {
 app.use((request, response) => {
     response.type('text/html');
     response.status(404);
-    response.send('404 - Not found');
+    response.send('<h1>404 error</h1><p>Sorry! That page couldn\'t be found.</p>');
 });
