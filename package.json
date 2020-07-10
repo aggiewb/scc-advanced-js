@@ -11,12 +11,14 @@
     "url": "git+https://github.com/aggiewb/scc-advanced-js.git"
   },
   "author": "Aggie Wheeler Bateman",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/aggiewb/scc-advanced-js/issues"
   },
   "homepage": "https://github.com/aggiewb/scc-advanced-js#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.0.0"
   }
 }

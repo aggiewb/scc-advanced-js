@@ -39,4 +39,10 @@ const employees = [
 
 const getAll = () => employees;
 
-module.exports = getAll; 
+const getEmployee = name => {
+    const employee = employees.find(personObj => personObj.name === name);
+    employee.salary = employee.salary.toLocaleString();
+    return employee;
+}
+
+module.exports = { getAll, getEmployee }; 
