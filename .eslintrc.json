@@ -7,9 +7,6 @@
     "parserOptions": {
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
     "rules": {
         "prefer-arrow-callback": "warn",
         "no-var": "warn"
