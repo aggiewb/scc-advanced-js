@@ -58,8 +58,8 @@ const addEmployee = (name, title, years, salary) => {
             return {status: "Employee not added due to undefined values passed in"};
         }
     }
-    employees.push(newEmployee);
-    return {status: "Employee added"};
+    const newEmployeeArrayLength = employees.push(newEmployee);
+    return {status: "Employee added", arrayLength: newEmployeeArrayLength};
 };
 
 const deleteEmployee = name => {

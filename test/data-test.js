@@ -21,7 +21,9 @@ describe('Calling data.getEmployee()', () => {
 describe('Calling data.addEmployee()', () => {
     describe('Call with all valid parameters', () => {
         it('Should add a new employee', () => {
-            assert.strictEqual(data.addEmployee('John', 'test dev', 1, 500).status, 'Employee added');
+            const employeeToAdd = data.addEmployee('John', 'test dev', 1, 500);
+            assert.strictEqual(employeeToAdd.status, 'Employee added');
+            assert.strictEqual(employeeToAdd.arrayLength, data.getAll().length);
         });
     });
     describe('Call with all valid parameters but employee already exists', () => {
