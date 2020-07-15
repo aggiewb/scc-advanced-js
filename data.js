@@ -59,12 +59,16 @@ const addEmployee = (name, title, years, salary) => {
         }
     }
     const newEmployeeArrayLength = employees.push(newEmployee);
-    return {status: "Employee added", arrayLength: newEmployeeArrayLength};
+    return {status: "Employee added", employeeSize: newEmployeeArrayLength};
 };
 
 const deleteEmployee = name => {
     const indexOfEmployeeToRemove = employees.findIndex(personObj => personObj.name === name);
+    if(indexOfEmployeeToRemove === -1){
+        return {status: "Employee not found and unable to delete"};
+    }
     employees.splice(indexOfEmployeeToRemove, indexOfEmployeeToRemove + 1);
+    return {status: "Employee found and deleted", employeeSize: getAll().length};
 }
 
 module.exports = { getAll, getEmployee, addEmployee, deleteEmployee }; 
