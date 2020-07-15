@@ -46,4 +46,9 @@ describe('Calling data.deleteEmployee()', () => {
             assert.strictEqual(employeeDeleted.employeeSize, data.getAll().length);
         });
     });
+    describe('Call with unsuccesful deletion of nonexisting employee', () => {
+        it('Should return with a status of "Employee not found and unable to delete"', () => {
+            assert.strictEqual(data.deleteEmployee('Rob').status, "Employee not found and unable to delete");
+        });
+    });
 });
