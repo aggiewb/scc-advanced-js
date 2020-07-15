@@ -17,3 +17,21 @@ describe('Calling data.getEmployee()', () => {
         });
     });
 });
+
+describe('Calling data.addEmployee()', () => {
+    describe('Call with all valid parameters', () => {
+        it('Should add a new employee', () => {
+            assert.strictEqual(data.addEmployee('John', 'test dev', 1, 500).status, 'Employee added');
+        });
+    });
+    describe('Call with all valid parameters but employee already exists', () => {
+        it('Should return with status of "Employee already exists"', () => {
+            assert.strictEqual(data.addEmployee('Aggie','test dev', 1, 500).status, 'Employee already exists');
+        });
+    });
+    describe('Call with some parameters not passed in', () => {
+        it('Should return with status of "Employee not added due to undefined values passed in"', () => {
+            assert.strictEqual(data.addEmployee('Rob', 'test dev').status, 'Employee not added due to undefined values passed in');
+        });
+    });
+});
