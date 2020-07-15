@@ -42,24 +42,24 @@ const getAll = () => employees;
 const getEmployee = name => {
     const employee = employees.find(personObj => personObj.name === name);
     if(employee === undefined){
-        return {"status": "Employee not found", employee: null};
+        return {status: "Employee not found", employee: null};
     }
     employee.salary = employee.salary.toLocaleString();
-    return {"status": "Employee found", employee};
+    return {status: "Employee found", employee};
 };
 
 const addEmployee = (name, title, years, salary) => {
     if(getEmployee(name).employee !== null){
-        return {"status": "Employee already exists"};
+        return {status: "Employee already exists"};
     }
     const newEmployee = {name, title, years, salary};
     for(let key in newEmployee){
         if(newEmployee[key] === undefined){
-            return {"status": "Employee not added due to undefined values passed in"};
+            return {status: "Employee not added due to undefined values passed in"};
         }
     }
     employees.push(newEmployee);
-    return {"status": "Employee added"};
+    return {status: "Employee added"};
 };
 
 const deleteEmployee = name => {
