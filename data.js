@@ -53,7 +53,7 @@ const addEmployee = (name, title, years, salary) => {
         return {status: "Employee already exists"};
     }
     const newEmployee = {name, title, years, salary};
-    for(let key in newEmployee){
+    for(const key in newEmployee){
         if(newEmployee[key] === undefined){
             return {status: "Employee not added due to undefined values passed in"};
         }
