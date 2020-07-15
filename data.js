@@ -41,8 +41,34 @@ const getAll = () => employees;
 
 const getEmployee = name => {
     const employee = employees.find(personObj => personObj.name === name);
+    if(employee === undefined){
+        return {status: "Employee not found", employee: null};
+    }
     employee.salary = employee.salary.toLocaleString();
-    return employee;
+    return {status: "Employee found", employee};
 };
 
-module.exports = { getAll, getEmployee }; 
+const addEmployee = (name, title, years, salary) => {
+    if(getEmployee(name).employee !== null){
+        return {status: "Employee already exists"};
+    }
+    const newEmployee = {name, title, years, salary};
+    for(const key in newEmployee){
+        if(newEmployee[key] === undefined){
+            return {status: "Employee not added due to undefined values passed in"};
+        }
+    }
+    const newEmployeeArrayLength = employees.push(newEmployee);
+    return {status: "Employee added", employeeSize: newEmployeeArrayLength};
+};
+
+const deleteEmployee = name => {
+    const indexOfEmployeeToRemove = employees.findIndex(personObj => personObj.name === name);
+    if(indexOfEmployeeToRemove === -1){
+        return {status: "Employee not found and unable to delete"};
+    }
+    employees.splice(indexOfEmployeeToRemove, indexOfEmployeeToRemove + 1);
+    return {status: "Employee found and deleted", employeeSize: getAll().length};
+}
+
+module.exports = { getAll, getEmployee, addEmployee, deleteEmployee }; 
