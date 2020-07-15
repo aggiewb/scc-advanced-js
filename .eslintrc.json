@@ -10,5 +10,9 @@
     "rules": {
         "prefer-arrow-callback": "warn",
         "no-var": "warn"
+    },
+    "globals": {
+        "describe": "readonly",
+        "it": "readonly"
     }
 }
