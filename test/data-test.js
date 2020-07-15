@@ -37,3 +37,13 @@ describe('Calling data.addEmployee()', () => {
         });
     });
 });
+
+describe('Calling data.deleteEmployee()', () => {
+    describe('Call with successful deletion of existing employee', () => {
+        it('Should delete employee', () => {
+            const employeeDeleted = data.deleteEmployee('Aggie');
+            assert.strictEqual(employeeDeleted.status, "Employee found and deleted");
+            assert.strictEqual(employeeDeleted.employeeSize, data.getAll().length);
+        });
+    });
+});
