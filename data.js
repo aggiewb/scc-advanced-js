@@ -49,9 +49,18 @@ const getEmployee = name => {
 };
 
 const addEmployee = (name, title, years, salary) => {
+    if(getEmployee(name).employee !== null){
+        return {"status": "Employee already exists"};
+    }
     const newEmployee = {name, title, years, salary};
+    for(let key in newEmployee){
+        if(newEmployee[key] === undefined){
+            return {"status": "Employee not added due to undefined values passed in"};
+        }
+    }
     employees.push(newEmployee);
-}
+    return {"status": "Employee added"};
+};
 
 const deleteEmployee = name => {
     const indexOfEmployeeToRemove = employees.findIndex(personObj => personObj.name === name);
