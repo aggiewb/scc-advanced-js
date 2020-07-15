@@ -41,8 +41,11 @@ const getAll = () => employees;
 
 const getEmployee = name => {
     const employee = employees.find(personObj => personObj.name === name);
+    if(employee === undefined){
+        return {"status": "Employee not found", employee: null};
+    }
     employee.salary = employee.salary.toLocaleString();
-    return employee;
+    return {"status": "Employee found", employee};
 };
 
 const addEmployee = (name, title, years, salary) => {
