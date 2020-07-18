@@ -3,7 +3,7 @@ const decache = require('decache');
 let data;
 
 describe('Testing data.js', () => {
-    //The before each and after each functions will "reset" the data array to its original length and content before each it test.
+    //The beforeEach() and afterEach() functions will "reset" the data array to its original length and content before each "it" test.
     //Installed decache package which lets you delete modules from node.js require() cache. This is useful when testing your modules/projects.
     //All of these were used to ensure the array length tests for addEmployee() and deleteEmployee() are testing from the original state of the array.
     //https://www.npmjs.com/package/decache
