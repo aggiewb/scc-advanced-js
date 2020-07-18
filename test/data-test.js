@@ -23,7 +23,7 @@ describe('Calling data.addEmployee()', () => {
         it('Should add a new employee, return status "Employee added" and new size of all employees', () => {
             const employeeAdded = data.addEmployee('John', 'test dev', 1, 500);
             assert.strictEqual(employeeAdded.status, 'Employee added');
-            assert.strictEqual(employeeAdded.employeeSize, data.getAll().length);
+            assert.lengthOf(data.getAll(), employeeAdded.employeeSize);
         });
     });
     describe('Passing in all valid parameters but employee already exists', () => {
@@ -43,7 +43,7 @@ describe('Calling data.deleteEmployee()', () => {
         it('Should delete employee, return status "Employee found and deleted" and new size of all employees', () => {
             const employeeDeleted = data.deleteEmployee('Aggie');
             assert.strictEqual(employeeDeleted.status, "Employee found and deleted");
-            assert.strictEqual(employeeDeleted.employeeSize, data.getAll().length);
+            assert.lengthOf(data.getAll(), employeeDeleted.employeeSize);
         });
     });
     describe('Passing in undefined employee', () => {
