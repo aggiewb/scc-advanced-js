@@ -1,5 +1,6 @@
 const assert = require('chai').assert;
 const decache = require('decache');
+const ORIGINAL_EMPLOYEE_LENGTH = 6;
 let data;
 
 describe('Testing data.js', () => {
@@ -36,9 +37,8 @@ describe('Testing data.js', () => {
         describe('Passing in all valid parameters', () => {
             it('Should add a new employee, return status "Employee added" and new size of all employees', () => {
                 const employeeAdded = data.addEmployee('John', 'test dev', 1, 500);
-                const expectedArrayLength = 7;
                 assert.strictEqual(employeeAdded.status, 'Employee added');
-                assert.strictEqual(expectedArrayLength, employeeAdded.employeeSize);
+                assert.strictEqual(ORIGINAL_EMPLOYEE_LENGTH + 1, employeeAdded.employeeSize);
             });
         });
         describe('Passing in all valid parameters but employee already exists', () => {
@@ -57,9 +57,8 @@ describe('Testing data.js', () => {
         describe('Passing in defined employee', () => {
             it('Should delete employee, return status "Employee found and deleted" and new size of all employees', () => {
                 const employeeDeleted = data.deleteEmployee('Aggie');
-                const expectedArrayLength = 5;
                 assert.strictEqual(employeeDeleted.status, "Employee found and deleted");
-                assert.strictEqual(expectedArrayLength, employeeDeleted.employeeSize);
+                assert.strictEqual(ORIGINAL_EMPLOYEE_LENGTH - 1, employeeDeleted.employeeSize);
             });
         });
         describe('Passing in undefined employee', () => {
