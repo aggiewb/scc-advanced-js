@@ -14,7 +14,7 @@ app.use(express.static(`${__dirname}/public`));
 app.get('/detail', (request, response) => {
     const name = request.query.employee;
     Employee.find({name: name}).lean()
-            .exec(function(err, employee){
+            .exec((err, employee) => {
                 if(err) return console.log(err);
                 response.render('details', {employee});
             });
@@ -27,7 +27,7 @@ app.get('/about', (request, response) => {
 
 app.get('/', (request, response) => {
     Employee.find({}).lean()
-            .exec(function(err, employees){
+            .exec((err, employees) => {
                 if(err) return console.log(err);
                 response.render('home', {employees});
             });
