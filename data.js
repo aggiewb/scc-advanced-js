@@ -30,7 +30,7 @@ const employees = [
         salary: 70000
     },
     {
-        name: 'Michelle',
+        name: 'Mann, Hugh',
         title: 'Project Manager',
         years: 2,
         salary: 90000
