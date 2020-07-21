@@ -2,6 +2,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const data = require('./data.js');
+const Employee = require('./models/Employee.js');
 
 const app = express();
 app.set('port', 3000);
