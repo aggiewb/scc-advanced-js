@@ -1,16 +1,11 @@
 'use strict';
 const express = require('express');
 const handlebars = require('express-handlebars');
-const mongoose = require('mongoose');
-require('dotenv').config();
 const data = require('./data.js');
 
 const app = express();
 app.set('port', 3000);
 app.listen(app.get('port'), () => console.log('Express server started'));
-
-mongoose.connect(process.env.CONNECTION_STRING_URI, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connection.on('open', () => console.log('Mongoose connected'));
 
 app.engine('handlebars', handlebars({defaultLayout: false}));
 app.set('view engine', 'handlebars');
