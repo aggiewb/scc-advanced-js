@@ -1,7 +1,6 @@
 'use strict';
 const express = require('express');
 const handlebars = require('express-handlebars');
-const data = require('./data.js');
 const Employee = require('./models/Employee.js');
 
 const app = express();
@@ -14,7 +13,11 @@ app.use(express.static(`${__dirname}/public`));
 
 app.get('/detail', (request, response) => {
     const name = request.query.employee;
-    response.render('details', {employee: name, details: data.getEmployee(name).employee});
+    Employee.find({name: name}).lean()
+            .exec(function(err, employee){
+                if(err) return console.log(err);
+                response.render('details', {employee});
+            });
 });
 
 app.get('/about', (request, response) => {
@@ -23,7 +26,11 @@ app.get('/about', (request, response) => {
 });
 
 app.get('/', (request, response) => {
-    response.render('home', {employees: data.getAll()});
+    Employee.find({}).lean()
+            .exec(function(err, employees){
+                if(err) return console.log(err);
+                response.render('home', {employees});
+            });
 });
 
 app.use((request, response) => {
