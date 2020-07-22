@@ -2,6 +2,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const Employee = require('./models/Employee.js');
+const { request, response } = require('express');
 
 const app = express();
 app.set('port', 3000);
@@ -13,9 +14,10 @@ app.use(express.static(`${__dirname}/public`));
 
 app.get('/detail', (request, response) => {
     const name = request.query.employee;
-    Employee.find({name: name}).lean()
+    Employee.findOne({name}).lean()
             .exec((err, employee) => {
                 if(err) return console.log(err);
+                console.log(employee);
                 response.render('details', {employee});
             });
 });
