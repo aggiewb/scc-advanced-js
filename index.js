@@ -22,6 +22,20 @@ app.get('/detail', (request, response) => {
             });
 });
 
+app.get('/delete', (request, response) => {
+    const id = request.query.id;
+    Employee.findByIdAndDelete(id).lean()
+            .exec((err, employee) => {
+                if(err){
+                    return console.log(err);
+                } else if(employee === null) {
+                    response.send(`Employee with ${id} id does not exist. Cannot delete.`);
+                } else {
+                    response.send(`${employee.name} was deleted`);
+                }
+            });
+});
+
 app.get('/about', (request, response) => {
     response.type('text/html');
     response.render('about');
