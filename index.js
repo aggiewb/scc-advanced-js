@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const handlebars = require('express-handlebars');
-const data = require('./data.js');
+const Employee = require('./models/Employee.js');
 
 const app = express();
 app.set('port', 3000);
@@ -13,7 +13,25 @@ app.use(express.static(`${__dirname}/public`));
 
 app.get('/detail', (request, response) => {
     const name = request.query.employee;
-    response.render('details', {employee: name, details: data.getEmployee(name).employee});
+    Employee.findOne({name}).lean()
+            .exec((err, employee) => {
+                if(err) return console.log(err);
+                response.render('details', {employee});
+            });
+});
+
+app.get('/delete', (request, response) => {
+    const id = request.query.id;
+    Employee.findByIdAndDelete(id).lean()
+            .exec((err, employee) => {
+                if(err){
+                    return console.log(err);
+                } else if(!employee) {
+                    response.send(`Employee with id: ${id} does not exist. Deletion unsuccessful.`);
+                } else {
+                    response.send(`Deletion of ${employee.name} with id: ${id} was successful`);
+                }
+            });
 });
 
 app.get('/about', (request, response) => {
@@ -22,7 +40,11 @@ app.get('/about', (request, response) => {
 });
 
 app.get('/', (request, response) => {
-    response.render('home', {employees: data.getAll()});
+    Employee.find({}).lean()
+            .exec((err, employees) => {
+                if(err) return console.log(err);
+                response.render('home', {employees});
+            });
 });
 
 app.use((request, response) => {

@@ -1,36 +1,36 @@
 const employees = [
     {
-        name: 'Aggie',
+        name: 'Bateman, Aggie',
         title: 'Web Dev 1',
         years: 2,
         salary: 80000
     }, 
     {
-        name: 'Steven',
+        name: 'Smith, Steven',
         title: 'Web Dev Intern',
         years: 5,
         salary: 5000
     }, 
     {
-        name: 'Sherman',
+        name: 'Sonsalla, Sherman',
         title: 'Web Dev 2',
         years: 3,
         salary: 90000
     }, 
     {
-        name: 'Evelynn',
+        name: 'Gardner, Evelynn',
         title: 'Senior Developer',
         years: 8,
         salary: 200000
     }, 
     {
-        name: 'Frank',
+        name: 'Dogman, Frank',
         title: 'QA Engineer',
         years: 2,
         salary: 70000
     },
     {
-        name: 'Michelle',
+        name: 'Mann, Hugh',
         title: 'Project Manager',
         years: 2,
         salary: 90000
