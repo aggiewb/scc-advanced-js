@@ -16,7 +16,6 @@ app.get('/detail', (request, response) => {
     Employee.findOne({name}).lean()
             .exec((err, employee) => {
                 if(err) return console.log(err);
-                console.log(employee);
                 response.render('details', {employee});
             });
 });
@@ -27,10 +26,10 @@ app.get('/delete', (request, response) => {
             .exec((err, employee) => {
                 if(err){
                     return console.log(err);
-                } else if(employee === null) {
-                    response.send(`Employee with ${id} id does not exist. Cannot delete.`);
+                } else if(!employee) {
+                    response.send(`Employee with id: ${id} does not exist. Deletion unsuccessful.`);
                 } else {
-                    response.send(`${employee.name} was deleted`);
+                    response.send(`Deletion of ${employee.name} with id: ${id} was successful`);
                 }
             });
 });
