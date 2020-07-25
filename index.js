@@ -15,7 +15,9 @@ app.get('/detail', (request, response) => {
     const name = request.query.employee;
     Employee.findOne({name}).lean()
             .exec((err, employee) => {
-                if(err) return console.log(err);
+                if(err){
+                    response.send(500, {message: 'Server error. Employee request unsuccessful'});
+                }
                 response.render('details', {employee});
             });
 });
@@ -25,11 +27,11 @@ app.get('/delete', (request, response) => {
     Employee.findByIdAndDelete(id).lean()
             .exec((err, employee) => {
                 if(err){
-                    return console.log(err);
+                    response.send(500, {message: 'Server error. Deletion unsuccessful'});
                 } else if(!employee) {
                     response.send(`Employee with id: ${id} does not exist. Deletion unsuccessful.`);
                 } else {
-                    response.send(`Deletion of ${employee.name} with id: ${id} was successful`);
+                    response.send(`Deletion of ${employee.name} with id: ${id} was successful.`);
                 }
             });
 });
@@ -42,7 +44,9 @@ app.get('/about', (request, response) => {
 app.get('/', (request, response) => {
     Employee.find({}).lean()
             .exec((err, employees) => {
-                if(err) return console.log(err);
+                if(err){
+                    response.send(500, {message: 'Server error. Employee request unsuccessful.'});
+                }
                 response.render('home', {employees});
             });
 });
