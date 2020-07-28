@@ -7,6 +7,8 @@ const apiRoute = require('./routes/api.js');
 const app = express();
 
 app.use(bodyParser.json());
+app.use(apiRoute);
+app.use(apiRoute, require('cors')());
 
 app.set('port', 3000);
 app.listen(app.get('port'), () => console.log('Express server started'));
@@ -14,9 +16,6 @@ app.listen(app.get('port'), () => console.log('Express server started'));
 app.engine('handlebars', handlebars({defaultLayout: false}));
 app.set('view engine', 'handlebars');
 app.use(express.static(`${__dirname}/public`));
-
-app.use(apiRoute);
-app.use(apiRoute, require('cors')());
 
 app.get('/detail', (request, response) => {
     const name = request.query.employee;
