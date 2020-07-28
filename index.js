@@ -2,14 +2,18 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const Employee = require('./models/Employee.js');
-
 const app = express();
+const apiRoute = require('./routes/api.js');
+
 app.set('port', 3000);
 app.listen(app.get('port'), () => console.log('Express server started'));
 
 app.engine('handlebars', handlebars({defaultLayout: false}));
 app.set('view engine', 'handlebars');
 app.use(express.static(`${__dirname}/public`));
+
+app.use(apiRoute);
+app.use(apiRoute, require('cors')());
 
 app.get('/detail', (request, response) => {
     const name = request.query.employee;
