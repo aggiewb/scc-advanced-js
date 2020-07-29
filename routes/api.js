@@ -3,6 +3,14 @@ const Employee = require('../models/Employee.js')
 const router = express.Router();
 
 //GET route for a single employee
+router.get('/api/employee/:name', (request, response) => {
+    const name = request.params.name;
+    Employee.findOne({name}).lean()
+            .then((employee) => {
+                response.json({name: employee.name, title: employee.title, salary: employee.salary, years: employee.years});
+            })
+            .catch(err => response.status(500).send('Error occurred: database error.'));
+});
 
 //GET route for all employees
 

@@ -3,12 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');
 const Employee = require('./models/Employee.js');
-const apiRoute = require('./routes/API.js');
+const apiRoute = require('./routes/api.js');
 const app = express();
 
 app.use(bodyParser.json());
 app.use(apiRoute);
-app.use('/API', require('cors')());
+app.use('/api', require('cors')());
 
 app.set('port', 3000);
 app.listen(app.get('port'), () => console.log('Express server started'));
