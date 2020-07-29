@@ -13,6 +13,15 @@ router.get('/api/employee/:name', (request, response) => {
 });
 
 //GET route for all employees
+router.get('/api/employees', (request, response) => {
+    Employee.find({}).lean()
+            .then((employees) => {
+                    response.json(employees.map(employee => { 
+                        return {name: employee.name, title: employee.title, salary: employee.salary, years: employee.years};
+                    }));
+            })
+            .catch(err => response.status(500).send('Error occurred: database error.'));
+});
 
 //DELETE route for deleting an employee
 
