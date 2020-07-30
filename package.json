@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "start": "nodemon ./index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/aggiewb/scc-advanced-js#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.0.0",
@@ -29,6 +31,7 @@
     "chai": "^4.2.0",
     "decache": "^4.6.0",
     "eslint": "^7.4.0",
-    "mocha": "^8.0.1"
+    "mocha": "^8.0.1",
+    "nodemon": "^2.0.4"
   }
 }
