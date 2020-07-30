@@ -6,41 +6,58 @@ const router = express.Router();
 router.get('/api/employee/:id', (request, response) => {
     const id = request.params.id;
     Employee.findById(id).lean()
-            .then((employee) => {
+            .then(employee => {
                 response.json({employee});
             })
-            .catch(() => response.status(500).send('Error occurred: database error.'));
+            .catch(err => response.status(500).json({error: err.message}));
 });
 
 //GET route for all employees
 router.get('/api/employees', (request, response) => {
     Employee.find({}).lean()
-                     .then((employee) => {
+                     .then(employee => {
                          response.json({employee});
                         })
-                     .catch(() => response.status(500).send('Error occurred: database error.'));
+                     .catch(err => response.status(500).json({error: err.message}));
 });
 
 //DELETE route for deleting an employee
+router.delete('/api/employee', (request, response) => {
+    const requestBody = request.body;
+    //Body parser is always making an request.body object
+    if(!Object.keys(requestBody).length){
+        return response.status(400).send('Request body is missing');
+    }
+    Employee.findById(requestBody._id)
+            .then(employee => {
+                if(!employee){
+                    return response.status(400).send(`Employee with id: ${requestBody._id} does not exist. Deletion unsuccessful.`);
+                }
+                employee.remove();
+                response.status(200).json({employeeDeleted: employee});
+            })
+            .catch(err => response.status(500).json({error: err.message}));
+});
 
 //POST route for adding or updating an employee
 router.post('/api/employee', (request, response) => {
+    const requestBody = request.body;
     //Body parser is always making an request.body object
-    if(!Object.keys(request.body).length){
+    if(!Object.keys(requestBody).length){
         return response.status(400).send('Request body is missing');
     }
 
-    if(!request.body.name){
+    if(!requestBody.name){
         return response.status(400).send('Required name field is missing');
     }
 
-    Employee.findById(request.body._id)
+    Employee.findById(requestBody._id)
             .then(employee => {
                 if(!employee){
-                    employee = new Employee(request.body);
+                    employee = new Employee(requestBody);
                 } else {
-                    for(const key in request.body){
-                        employee[key] = request.body[key];
+                    for(const key in requestBody){
+                        employee[key] = requestBody[key];
                     }
                 }
                 return employee.save();
@@ -48,7 +65,7 @@ router.post('/api/employee', (request, response) => {
             .then(employee => {
                 response.status(200).json(employee);
             })
-            .catch(err => response.status(500).json(err.message));
+            .catch(err => response.status(500).json({error: err.message}));
 });
 
 module.exports = router;
