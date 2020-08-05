@@ -30,14 +30,15 @@
                 }
 
                 handleDetails(){
-                    this.setState({isDetailsActive: true})
+                    this.setState({isDetailsActive: !true})
                 }
 
                 render(){
                     if(this.state.isDetailsActive){
-                        return <article>
+                        return <div>
                             <EmployeeDetails employee={this.state.currentEmployee}/>
-                        </article>;
+                            <Footer handleDetails={this.handleDetails.bind(this)}/>
+                        </div>;
                     } else {
                         return <article>
                             <h2>Employees</h2>
@@ -60,6 +61,12 @@
                         <li>${props.employee.salary}</li>
                     </ul>
                 </section>;
+            }
+
+            const Footer = props => {
+                return <footer>
+                    <a href="#" onClick={props.handleDetails}>Home</a>
+                </footer>;
             }
 
             ReactDOM.render(<App />, document.getElementById('react-app'));
