@@ -29,7 +29,7 @@
             }
 
             const Employees = (props) => {
-                return props.list.map((item, i) => <li key={i}>{item.name}</li>);
+                return props.list.map((employee, i) => <li key={i}><a href={`detail?employee=${employee.name}`}>{employee.name}</a></li>);
             }
 
             ReactDOM.render(<App />, document.getElementById('react-app'));
