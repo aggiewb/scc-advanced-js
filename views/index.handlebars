@@ -16,20 +16,27 @@
                 constructor(props){
                     super(props);
                     this.state = {
-                        employees: {{{employees}}}
+                        employees: {{{employees}}},
+                        currentEmployee: ""
                     }
+                }
+                handleClick(event){
+                    event.preventDefault();
+                    const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
+                    this.setState({currentEmployee: employee});
                 }
                 render(){
                     return (
                         <article>
                             <h2>Employees</h2>
-                            <ul><Employees list={this.state.employees}/></ul>
+                            <ul><Employees handleClick={this.handleClick.bind(this)} list={this.state.employees}/></ul>
+                            <EmployeeDetails employee={this.state.currentEmployee}/>
                         </article>);
                 };
             }
 
             const Employees = (props) => {
-                return props.list.map((employee, i) => <li key={i}><a href={`detail?employee=${employee.name}`}>{employee.name}</a></li>);
+                return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleClick}>{employee.name}</a></li>);
             }
 
             ReactDOM.render(<App />, document.getElementById('react-app'));
