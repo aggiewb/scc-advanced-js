@@ -35,8 +35,19 @@
                 };
             }
 
-            const Employees = (props) => {
+            const Employees = props => {
                 return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleClick}>{employee.name}</a></li>);
+            }
+
+            const EmployeeDetails = props => {
+                return <section>
+                    <h2>{props.employee.name}</h2>
+                    <ul>
+                        <li>{props.employee.title}</li>
+                        <li>{props.employee.years} years</li>
+                        <li>${props.employee.salary}</li>
+                    </ul>
+                </section>;
             }
 
             ReactDOM.render(<App />, document.getElementById('react-app'));
