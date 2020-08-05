@@ -17,21 +17,33 @@
                     super(props);
                     this.state = {
                         employees: {{{employees}}},
-                        currentEmployee: ""
+                        currentEmployee: "",
+                        isDetailsActive: false
                     }
                 }
+
                 handleClick(event){
                     event.preventDefault();
                     const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
                     this.setState({currentEmployee: employee});
+                    this.setState({isDetailsActive: true});
                 }
+
+                handleDetails(){
+                    this.setState({isDetailsActive: true})
+                }
+
                 render(){
-                    return (
-                        <article>
+                    if(this.state.isDetailsActive){
+                        return <article>
+                            <EmployeeDetails employee={this.state.currentEmployee}/>
+                        </article>;
+                    } else {
+                        return <article>
                             <h2>Employees</h2>
                             <ul><Employees handleClick={this.handleClick.bind(this)} list={this.state.employees}/></ul>
-                            <EmployeeDetails employee={this.state.currentEmployee}/>
-                        </article>);
+                        </article>
+                    }
                 };
             }
 
