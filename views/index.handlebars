@@ -37,12 +37,12 @@
                     if(this.state.isDetailsActive){
                         return <div>
                             <EmployeeDetails employee={this.state.currentEmployee}/>
-                            <Footer handleDetails={this.handleDetails.bind(this)}/>
+                            <Footer handleDetails={() => this.handleDetails()}/>
                         </div>;
                     } else {
                         return <article>
                             <h2>Employees</h2>
-                            <ul><Employees handleClick={this.handleClick.bind(this)} list={this.state.employees}/></ul>
+                            <ul><Employees handleClick={event => this.handleClick(event)} list={this.state.employees}/></ul>
                         </article>;
                     }
                 };
