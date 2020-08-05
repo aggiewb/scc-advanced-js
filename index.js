@@ -53,7 +53,9 @@ app.get('/', (request, response) => {
                 if(err){
                     response.send(500, {message: 'Server error. Employee request unsuccessful.'});
                 }
-                response.render('home', {employees});
+                // Either handlebars or React is parsing the employees string passed in
+                // It only correctly parses in the handlebars file with triple stash
+                response.render('index', {employees: JSON.stringify(employees)});
             });
 });
 
