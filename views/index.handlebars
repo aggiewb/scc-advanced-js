@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Best Websites Inc.</title>
+        <link href="css/style.css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="react-app"></div>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script type="text/babel">
+            class App extends React.Component {
+                constructor(props){
+                    super(props);
+                    this.state = {
+                        employees: {{{employees}}},
+                        currentEmployee: "",
+                        isDetailsActive: false
+                    }
+                }
+
+                handleClick(event){
+                    event.preventDefault();
+                    const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
+                    this.setState({currentEmployee: employee});
+                    this.toggleDetails();
+                }
+
+                toggleDetails(){
+                    this.setState({isDetailsActive: !this.state.isDetailsActive})
+                }
+
+                render(){
+                    if(this.state.isDetailsActive){
+                        return <div>
+                            <EmployeeDetails employee={this.state.currentEmployee}/>
+                            <Footer handleDetails={() => this.toggleDetails()}/>
+                        </div>;
+                    } else {
+                        return <article>
+                            <h1>Best Websites Inc.</h1>
+                            <h2>Employees</h2>
+                            <ul><Employees handleClick={event => this.handleClick(event)} list={this.state.employees}/></ul>
+                        </article>;
+                    }
+                };
+            }
+
+            const Employees = props => {
+                return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleClick}>{employee.name}</a></li>);
+            }
+
+            const EmployeeDetails = props => {
+                return <section>
+                    <h2>{props.employee.name}</h2>
+                    <ul>
+                        <li>{props.employee.title}</li>
+                        <li>{props.employee.years} years</li>
+                        <li>${props.employee.salary}</li>
+                    </ul>
+                </section>;
+            }
+
+            const Footer = props => {
+                return <footer>
+                    <a href="#" onClick={props.handleDetails}>Home</a>
+                </footer>;
+            }
+
+            ReactDOM.render(<App />, document.getElementById('react-app'));
+        </script>
+    </body>
+</html>
