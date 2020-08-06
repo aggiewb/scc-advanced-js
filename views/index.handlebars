@@ -26,18 +26,18 @@
                     event.preventDefault();
                     const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
                     this.setState({currentEmployee: employee});
-                    this.setState({isDetailsActive: true});
+                    this.toggleDetails();
                 }
 
-                handleDetails(){
-                    this.setState({isDetailsActive: false})
+                toggleDetails(){
+                    this.setState({isDetailsActive: !this.state.isDetailsActive})
                 }
 
                 render(){
                     if(this.state.isDetailsActive){
                         return <div>
                             <EmployeeDetails employee={this.state.currentEmployee}/>
-                            <Footer handleDetails={() => this.handleDetails()}/>
+                            <Footer handleDetails={() => this.toggleDetails()}/>
                         </div>;
                     } else {
                         return <article>
