@@ -38,11 +38,19 @@
                     this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
                 }
 
+                //TODO: Fix warning
+                //Warning: A component is changing a controlled input of type undefined to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). 
+                //Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
+                handleChange(event){
+                    const targetElement = event.target;
+                    this.setState({formValues: {[targetElement.id]: targetElement.value}});
+                }
+
                 render(){
                     if(this.state.isDetailsActive){
                         return <div>
                             <EmployeeDetails employee={this.state.currentEmployee}/>
-                            <Form employee={this.state.formValues} handleClear={() => this.handleClear()}/>
+                            <Form employee={this.state.formValues} handleClear={() => this.handleClear()} handleChange={event => this.handleChange(event)}/>
                             <Footer handleDetails={() => this.toggleDetails()}/>
                         </div>;
                     } else {
@@ -74,16 +82,16 @@
                 return <section>
                     <form>
                         <label htmlFor="name">Name:</label>
-                        <input id="name" value={props.employee.name}></input>
+                        <input id="name" value={props.employee.name} onChange={props.handleChange}></input>
 
                         <label htmlFor="title">Title:</label>
-                        <input id="title" value={props.employee.title}></input>
+                        <input id="title" value={props.employee.title} onChange={props.handleChange}></input>
                         
                         <label htmlFor="years">Years:</label>
-                        <input id="years" value={props.employee.years}></input>
+                        <input id="years" value={props.employee.years} onChange={props.handleChange}></input>
                         
                         <label htmlFor="salary">Salary:</label>
-                        <input id="salary" value={props.employee.salary}></input>
+                        <input id="salary" value={props.employee.salary} onChange={props.handleChange}></input>
                     </form>
                     <button onClick={props.handleClear}>Clear</button>
                 </section>
