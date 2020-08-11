@@ -3,3 +3,12 @@ body {
     color: #1d3557;
     font-family: 'Overpass Mono', monospace;
 }
+
+form > * {
+    display: block;
+    margin-top: 5px;
+}
+
+footer {
+    margin-top: 20px;
+}
