@@ -18,7 +18,12 @@
                     this.state = {
                         employees: {{{employees}}},
                         currentEmployee: {},
-                        formValues: {},
+                        formValues: {
+                            name: '', 
+                            title: '', 
+                            years: '', 
+                            salary: ''
+                        },
                         isDetailsActive: false
                     }
                 }
@@ -26,7 +31,15 @@
                 handleDetails(event){
                     event.preventDefault();
                     const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
-                    this.setState({currentEmployee: employee, formValues: employee});
+                    this.setState({
+                        currentEmployee: employee, 
+                        formValues: {
+                            name: employee.name, 
+                            title: employee.title, 
+                            years: employee.years, 
+                            salary: employee.salary
+                        }
+                    });
                     this.toggleDetails();
                 }
 
@@ -38,12 +51,16 @@
                     this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
                 }
 
-                //TODO: Fix warning
-                //Warning: A component is changing a controlled input of type undefined to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa). 
-                //Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
                 handleChange(event){
                     const targetElement = event.target;
-                    this.setState({formValues: {[targetElement.id]: targetElement.value}});
+                    this.setState({
+                        formValues: {
+                            //spread syntax, which copies own enumerable properties from a provided object onto a new object
+                            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals  
+                            ...this.state.formValues,
+                            [targetElement.id]: targetElement.value
+                        }
+                    });
                 }
 
                 render(){
