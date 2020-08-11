@@ -61,7 +61,13 @@
                         <li>{props.employee.years} years</li>
                         <li>${props.employee.salary}</li>
                     </ul>
+                    <Form details={props}/>
                 </section>;
+            }
+
+            const Form = props => {
+                return <form>
+                </form>;
             }
 
             const Footer = props => {
