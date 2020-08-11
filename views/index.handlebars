@@ -22,7 +22,7 @@
                     }
                 }
 
-                handleClick(event){
+                handleDetails(event){
                     event.preventDefault();
                     const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
                     this.setState({currentEmployee: employee});
@@ -32,6 +32,7 @@
                 toggleDetails(){
                     this.setState({isDetailsActive: !this.state.isDetailsActive})
                 }
+
 
                 render(){
                     if(this.state.isDetailsActive){
@@ -43,14 +44,14 @@
                         return <article>
                             <h1>Best Websites Inc.</h1>
                             <h2>Employees</h2>
-                            <ul><Employees handleClick={event => this.handleClick(event)} list={this.state.employees}/></ul>
+                            <ul><Employees handleDetails={event => this.handleDetails(event)} list={this.state.employees}/></ul>
                         </article>;
                     }
                 };
             }
 
             const Employees = props => {
-                return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleClick}>{employee.name}</a></li>);
+                return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleDetails}>{employee.name}</a></li>);
             }
 
             const EmployeeDetails = props => {
@@ -61,7 +62,6 @@
                         <li>{props.employee.years} years</li>
                         <li>${props.employee.salary}</li>
                     </ul>
-                    <Form employee={props.employee}/>
                 </section>;
             }
 
@@ -75,7 +75,7 @@
                     
                     <label for="salary">Salary:</label>
                     <input id="salary" value={props.employee.salary}></input>
-                    <button>Clear</button>
+                    <button onClick={props.handleClear}>Clear</button>
                 </form>;
             }
 
