@@ -15,11 +15,18 @@ footer, button {
 
 button {
     color: #F1FAEE;
-    border: none;
+    border: 3px solid #1d3557;
     border-radius: 5px;
     background-color: #1d3557;
     padding: 10px 15px;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    color: #1d3557;
+    background-color: #F1FAEE;
+
 }
