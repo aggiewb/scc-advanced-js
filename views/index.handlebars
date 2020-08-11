@@ -61,12 +61,21 @@
                         <li>{props.employee.years} years</li>
                         <li>${props.employee.salary}</li>
                     </ul>
-                    <Form details={props}/>
+                    <Form employee={props.employee}/>
                 </section>;
             }
 
             const Form = props => {
                 return <form>
+                    <label for="title">Title:</label>
+                    <input id="title" value={props.employee.title}></input>
+                    
+                    <label for="years">Years:</label>
+                    <input id="years" value={props.employee.years}></input>
+                    
+                    <label for="salary">Salary:</label>
+                    <input id="salary" value={props.employee.salary}></input>
+                    <button>Clear</button>
                 </form>;
             }
 
