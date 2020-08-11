@@ -18,6 +18,7 @@
                     this.state = {
                         employees: {{{employees}}},
                         currentEmployee: {},
+                        formValues: {},
                         isDetailsActive: false
                     }
                 }
@@ -25,7 +26,7 @@
                 handleDetails(event){
                     event.preventDefault();
                     const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
-                    this.setState({currentEmployee: employee});
+                    this.setState({currentEmployee: employee, formValues: employee});
                     this.toggleDetails();
                 }
 
@@ -33,11 +34,15 @@
                     this.setState({isDetailsActive: !this.state.isDetailsActive})
                 }
 
+                handleClear(){
+                    this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
+                }
 
                 render(){
                     if(this.state.isDetailsActive){
                         return <div>
                             <EmployeeDetails employee={this.state.currentEmployee}/>
+                            <Form employee={this.state.formValues} handleClear={() => this.handleClear()}/>
                             <Footer handleDetails={() => this.toggleDetails()}/>
                         </div>;
                     } else {
@@ -66,17 +71,22 @@
             }
 
             const Form = props => {
-                return <form>
-                    <label for="title">Title:</label>
-                    <input id="title" value={props.employee.title}></input>
-                    
-                    <label for="years">Years:</label>
-                    <input id="years" value={props.employee.years}></input>
-                    
-                    <label for="salary">Salary:</label>
-                    <input id="salary" value={props.employee.salary}></input>
+                return <section>
+                    <form>
+                        <label htmlFor="name">Name:</label>
+                        <input id="name" value={props.employee.name}></input>
+
+                        <label htmlFor="title">Title:</label>
+                        <input id="title" value={props.employee.title}></input>
+                        
+                        <label htmlFor="years">Years:</label>
+                        <input id="years" value={props.employee.years}></input>
+                        
+                        <label htmlFor="salary">Salary:</label>
+                        <input id="salary" value={props.employee.salary}></input>
+                    </form>
                     <button onClick={props.handleClear}>Clear</button>
-                </form>;
+                </section>
             }
 
             const Footer = props => {
