@@ -51,6 +51,14 @@
                     this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
                 }
 
+                handleUpdate(){
+
+                }
+
+                handleDelete(){
+
+                }
+
                 handleChange(event){
                     const targetElement = event.target;
                     this.setState({
@@ -67,7 +75,9 @@
                     if(this.state.isDetailsActive){
                         return <div>
                             <EmployeeDetails employee={this.state.currentEmployee}/>
-                            <Form employee={this.state.formValues} handleClear={() => this.handleClear()} handleChange={event => this.handleChange(event)}/>
+                            <Form employee={this.state.formValues} 
+                            handleClear={() => this.handleClear()} handleChange={event => this.handleChange(event)} 
+                            handleUpdate={event => this.handleUpdate(event)} handleDelete={event => this.handleDelete(event)}/>
                             <Footer handleDetails={() => this.toggleDetails()}/>
                         </div>;
                     } else {
@@ -111,6 +121,8 @@
                         <input id="salary" value={props.employee.salary} onChange={props.handleChange}></input>
                     </form>
                     <button onClick={props.handleClear}>Clear</button>
+                    <button onClick={props.handleUpdate}>Update</button>
+                    <button onClick={props.handleDelete}>Delete</button>
                 </section>
             }
 
