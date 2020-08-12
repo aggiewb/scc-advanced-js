@@ -15,6 +15,10 @@ input {
     margin-bottom: 10px;
 }
 
+abbr {
+    color: darkred;
+}
+
 button, input[type="submit"] {
     color: #F1FAEE;
     background-color: #1d3557;
