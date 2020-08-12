@@ -51,16 +51,24 @@
                     this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
                 }
 
-                componentDidMount(){
-                    handleUpdate(){
+                handleUpdate(){
 
-                    }
-
-                    handleDelete(){
-
-                    }
                 }
 
+                handleDelete(){
+                    const employee = this.state.currentEmployee;
+                    fetch('/api/employee', {
+                        method: 'DELETE',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(employee)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState({employees: this.state.employees.filter(employee => employee._id !== result.employeeDeleted._id)});
+                        this.toggleDetails();
+                    })
+                    .catch(error => console.log(error));
+                }
 
                 handleChange(event){
                     const targetElement = event.target;
@@ -80,7 +88,7 @@
                             <EmployeeDetails employee={this.state.currentEmployee}/>
                             <Form employee={this.state.formValues} 
                             handleClear={() => this.handleClear()} handleChange={event => this.handleChange(event)} 
-                            handleUpdate={event => this.handleUpdate(event)} handleDelete={event => this.handleDelete(event)}/>
+                            handleUpdate={event => this.handleUpdate(event)} handleDelete={() => this.handleDelete()}/>
                             <Footer handleDetails={() => this.toggleDetails()}/>
                         </div>;
                     } else {
@@ -90,8 +98,8 @@
                             <ul><Employees handleDetails={event => this.handleDetails(event)} list={this.state.employees}/></ul>
                         </article>;
                     }
-                };
-            }
+                }
+            };
 
             const Employees = props => {
                 return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleDetails}>{employee.name}</a></li>);
