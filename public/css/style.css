@@ -2,18 +2,20 @@ body {
     background-color: #F1FAEE;
     color: #1d3557;
     font-family: 'Overpass Mono', monospace;
-}
-
-form > * {
-    display: block;
-    margin-top: 5px;
+    font-size: 16px;
 }
 
 footer, button {
     margin-top: 15px;
 }
 
-button {
+input {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+button, input[type="submit"] {
     color: #F1FAEE;
     border: 3px solid #1d3557;
     border-radius: 5px;
@@ -25,8 +27,7 @@ button {
     margin-right: 10px;
 }
 
-button:hover {
+button:hover, input[type="submit"]:hover {
     color: #1d3557;
     background-color: #F1FAEE;
-
 }
