@@ -140,8 +140,8 @@
                 return <section>
                     <form  onSubmit={props.handleSubmit}>
                         <label htmlFor="name">
-                            Name:
-                            <input id="name" value={props.employee.name} onChange={props.handleChange} />
+                            Name<abbr title="Required">*</abbr>:
+                            <input id="name" value={props.employee.name} onChange={props.handleChange} required/>
                         </label>
 
                         <label htmlFor="title">
