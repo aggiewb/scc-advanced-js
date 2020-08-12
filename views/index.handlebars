@@ -51,8 +51,16 @@
                     this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
                 }
 
-                handleUpdate(){
-
+                handleSubmit(){
+                    const employee = this.state.currentEmployee;
+                    fetch('/api/employee', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(employee)
+                    })
+                    .then(response => response.json())
+                    .then(result => console.log(result))
+                    .catch(error => console.log(error));
                 }
 
                 handleDelete(){
@@ -119,20 +127,28 @@
             const Form = props => {
                 return <section>
                     <form>
-                        <label htmlFor="name">Name:</label>
-                        <input id="name" value={props.employee.name} onChange={props.handleChange}></input>
+                        <label htmlFor="name">
+                            Name:
+                            <input id="name" value={props.employee.name} onChange={props.handleChange} />
+                        </label>
 
-                        <label htmlFor="title">Title:</label>
-                        <input id="title" value={props.employee.title} onChange={props.handleChange}></input>
+                        <label htmlFor="title">
+                            Title:
+                            <input id="title" value={props.employee.title} onChange={props.handleChange} />
+                        </label>
                         
-                        <label htmlFor="years">Years:</label>
-                        <input id="years" value={props.employee.years} onChange={props.handleChange}></input>
+                        <label htmlFor="years">
+                            Years:
+                            <input id="years" value={props.employee.years} onChange={props.handleChange} />
+                        </label>
                         
-                        <label htmlFor="salary">Salary:</label>
-                        <input id="salary" value={props.employee.salary} onChange={props.handleChange}></input>
+                        <label htmlFor="salary">
+                            Salary:
+                            <input id="salary" value={props.employee.salary} onChange={props.handleChange} />
+                        </label>
+                        <input type="submit" value="Submit Changes" onClick={props.handleSubmit} />
                     </form>
                     <button onClick={props.handleClear}>Clear</button>
-                    <button onClick={props.handleUpdate}>Update</button>
                     <button onClick={props.handleDelete}>Delete</button>
                 </section>
             }
