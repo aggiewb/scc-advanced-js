@@ -1,7 +1,6 @@
 # scc-advanced-js
 
 ## WEEK 1 - Node.js up and running
--------------------------------------------------------------------------
 First step toward a working web server application. Should have following files and functionality:
 
 - Files in the root directory:
@@ -17,7 +16,6 @@ First step toward a working web server application. Should have following files 
   - Any other path returns a 404 status code and error message
 
 ## WEEK 2 - Express yourself
--------------------------------------------------------------------------
 Simplify server application and add formatted pages, using Express and basic templating.
 
 - Install these node modules:
@@ -38,7 +36,6 @@ Simplify server application and add formatted pages, using Express and basic tem
 - Create a .gitignore file in project folder that excludes the node_modules folder from git commits.
 
 ## WEEK 3 - Quality Matters
-------------------------------------------------------------------------
 Learned about test driven development and key techniques for ensuring code quality.
 Practicing those with a 2-part assignment.
 
@@ -61,7 +58,6 @@ Practicing those with a 2-part assignment.
 - All six test cases should pass when run via Mocha.
 
 ## WEEK 4 - DATABASE INTEGRATION
--------------------------------------------------------------------------
 Storing data in MongoDb and accessing it with Node.js and Mongoose.
 For the online database, credentials provided via Canvas upon assigment submittal.
 
@@ -81,7 +77,6 @@ Install the mongoose npm package,
   should return a response indicating whether delete succeeded or failed.
   
 ## WEEK 5 - REST APIS
--------------------------------------------------------------------------
 Soon you'll build a front-end that needs to access your data.  REST API's have now become necessary.
 
 For this week, provide API routes for each of the methods exported by your data module:
@@ -100,7 +95,6 @@ Each API should:
 No changes are required to your UI or existing data methods. You can use Postman for API testing.
 
 ## WEEK 6 - Frontend UI in React
--------------------------------------------------------------------------
 Converting the frontend UI into a single-page application (SPA) using React.
 
 Keeping existing HTML templates and routes for reference.
@@ -116,7 +110,6 @@ Hints:
  - Start with provided handlebars template. Components and additional functions will be added.
  
 ## WEEK 7 - React CRUD
--------------------------------------------------------------------------   
 Your read-only React home page looks great! Now it's time to allow editing.
 
 - Update your application with the following: 
