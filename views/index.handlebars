@@ -18,14 +18,28 @@
                     this.state = {
                         employees: {{{employees}}},
                         currentEmployee: {},
+                        formValues: {
+                            name: '', 
+                            title: '', 
+                            years: '', 
+                            salary: ''
+                        },
                         isDetailsActive: false
                     }
                 }
 
-                handleClick(event){
+                handleDetails(event){
                     event.preventDefault();
                     const employee = this.state.employees.find(employee => event.target.textContent === employee.name);
-                    this.setState({currentEmployee: employee});
+                    this.setState({
+                        currentEmployee: employee, 
+                        formValues: {
+                            name: employee.name, 
+                            title: employee.title, 
+                            years: employee.years, 
+                            salary: employee.salary
+                        }
+                    });
                     this.toggleDetails();
                 }
 
@@ -33,24 +47,82 @@
                     this.setState({isDetailsActive: !this.state.isDetailsActive})
                 }
 
+                handleClear(){
+                    this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
+                }
+
+                handleSubmit(event){
+                    event.preventDefault();
+                    const updatedEmployee = this.state.formValues;
+                    updatedEmployee._id = this.state.currentEmployee._id;
+                    fetch('/api/employee', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(updatedEmployee)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState({
+                            employees: this.state.employees.map(employee => {
+                                if(employee._id === result._id){
+                                    return result;
+                                }
+                                return employee;
+                            })
+                        });
+                        this.setState({currentEmployee: result});
+                    })
+                    .catch(error => console.log(error));
+                }
+
+                handleDelete(){
+                    const employee = this.state.currentEmployee;
+                    fetch('/api/employee', {
+                        method: 'DELETE',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(employee)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState({employees: this.state.employees.filter(employee => employee._id !== result.employeeDeleted._id)});
+                        this.toggleDetails();
+                    })
+                    .catch(error => console.log(error));
+                }
+
+                handleChange(event){
+                    const targetElement = event.target;
+                    this.setState({
+                        formValues: {
+                            //spread syntax, which copies own enumerable properties from a provided object onto a new object
+                            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals  
+                            ...this.state.formValues,
+                            [targetElement.id]: targetElement.value
+                        }
+                    });
+                }
+
                 render(){
                     if(this.state.isDetailsActive){
                         return <div>
                             <EmployeeDetails employee={this.state.currentEmployee}/>
+                            <Form employee={this.state.formValues} 
+                            handleClear={() => this.handleClear()} handleChange={event => this.handleChange(event)} 
+                            handleSubmit={event => this.handleSubmit(event)} handleDelete={() => this.handleDelete()}/>
                             <Footer handleDetails={() => this.toggleDetails()}/>
                         </div>;
                     } else {
                         return <article>
                             <h1>Best Websites Inc.</h1>
                             <h2>Employees</h2>
-                            <ul><Employees handleClick={event => this.handleClick(event)} list={this.state.employees}/></ul>
+                            <ul><Employees handleDetails={event => this.handleDetails(event)} list={this.state.employees}/></ul>
                         </article>;
                     }
-                };
-            }
+                }
+            };
 
             const Employees = props => {
-                return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleClick}>{employee.name}</a></li>);
+                return props.list.map((employee, i) => <li key={i}><a href="#" onClick={props.handleDetails}>{employee.name}</a></li>);
             }
 
             const EmployeeDetails = props => {
@@ -62,6 +134,35 @@
                         <li>${props.employee.salary}</li>
                     </ul>
                 </section>;
+            }
+
+            const Form = props => {
+                return <section>
+                    <form  onSubmit={props.handleSubmit}>
+                        <label htmlFor="name">
+                            Name<abbr title="Required">*</abbr>:
+                            <input id="name" value={props.employee.name} onChange={props.handleChange} required/>
+                        </label>
+
+                        <label htmlFor="title">
+                            Title:
+                            <input id="title" value={props.employee.title} onChange={props.handleChange} />
+                        </label>
+                        
+                        <label htmlFor="years">
+                            Years:
+                            <input id="years" value={props.employee.years} onChange={props.handleChange} />
+                        </label>
+                        
+                        <label htmlFor="salary">
+                            Salary:
+                            <input id="salary" value={props.employee.salary} onChange={props.handleChange} />
+                        </label>
+                        <input type="submit" value="Submit Changes"/>
+                    </form>
+                    <button onClick={props.handleClear}>Clear</button>
+                    <button onClick={props.handleDelete}>Delete</button>
+                </section>
             }
 
             const Footer = props => {
