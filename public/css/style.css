@@ -17,10 +17,10 @@ input {
 
 button, input[type="submit"] {
     color: #F1FAEE;
+    background-color: #1d3557;
     border: 3px solid #1d3557;
     border-radius: 5px;
-    background-color: #1d3557;
-    padding: 10px 15px;
+    padding: 6px 10px;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
