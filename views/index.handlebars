@@ -53,14 +53,25 @@
 
                 handleSubmit(event){
                     event.preventDefault();
-                    const employee = this.state.currentEmployee;
+                    const updatedEmployee = this.state.formValues;
+                    updatedEmployee._id = this.state.currentEmployee._id;
                     fetch('/api/employee', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(employee)
+                        body: JSON.stringify(updatedEmployee)
                     })
                     .then(response => response.json())
-                    .then(result => console.log(result))
+                    .then(result => {
+                        this.setState({
+                            employees: this.state.employees.map(employee => {
+                                if(employee._id === result._id){
+                                    return result;
+                                }
+                                return employee;
+                            })
+                        });
+                        this.setState({currentEmployee: result});
+                    })
                     .catch(error => console.log(error));
                 }
 
