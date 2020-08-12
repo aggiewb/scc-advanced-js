@@ -51,7 +51,8 @@
                     this.setState({formValues: {name: '', title: '', years: '', salary: ''}});
                 }
 
-                handleSubmit(){
+                handleSubmit(event){
+                    event.preventDefault();
                     const employee = this.state.currentEmployee;
                     fetch('/api/employee', {
                         method: 'POST',
@@ -96,7 +97,7 @@
                             <EmployeeDetails employee={this.state.currentEmployee}/>
                             <Form employee={this.state.formValues} 
                             handleClear={() => this.handleClear()} handleChange={event => this.handleChange(event)} 
-                            handleUpdate={event => this.handleUpdate(event)} handleDelete={() => this.handleDelete()}/>
+                            handleSubmit={event => this.handleSubmit(event)} handleDelete={() => this.handleDelete()}/>
                             <Footer handleDetails={() => this.toggleDetails()}/>
                         </div>;
                     } else {
@@ -126,7 +127,7 @@
 
             const Form = props => {
                 return <section>
-                    <form>
+                    <form  onSubmit={props.handleSubmit}>
                         <label htmlFor="name">
                             Name:
                             <input id="name" value={props.employee.name} onChange={props.handleChange} />
@@ -146,7 +147,7 @@
                             Salary:
                             <input id="salary" value={props.employee.salary} onChange={props.handleChange} />
                         </label>
-                        <input type="submit" value="Submit Changes" onClick={props.handleSubmit} />
+                        <input type="submit" value="Submit Changes"/>
                     </form>
                     <button onClick={props.handleClear}>Clear</button>
                     <button onClick={props.handleDelete}>Delete</button>
