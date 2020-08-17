@@ -22,16 +22,16 @@ router.get('/api/employees', (request, response) => {
 });
 
 //DELETE route for deleting an employee
-router.delete('/api/employee', (request, response) => {
-    const requestBody = request.body;
+router.delete('/api/employee/:id', (request, response) => {
+    const requestId = request.params.id;
     //Body parser is always making an request.body object
-    if(!Object.keys(requestBody).length){
-        return response.status(400).send('Request body is missing');
-    }
-    Employee.findById(requestBody._id)
+    // if(!Object.keys(requestBody).length){
+    //     return response.status(400).send('Request body is missing');
+    // }
+    Employee.findById(requestId)
             .then(employee => {
                 if(!employee){
-                    return response.status(400).send(`Employee with id: ${requestBody._id} does not exist. Deletion unsuccessful.`);
+                    return response.status(400).send(`Employee with id: ${requestId} does not exist. Deletion unsuccessful.`);
                 }
                 employee.remove();
                 response.status(200).json({employeeDeleted: employee});
