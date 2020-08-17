@@ -77,10 +77,8 @@
 
                 handleDelete(){
                     const employee = this.state.currentEmployee;
-                    fetch('/api/employee', {
-                        method: 'DELETE',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(employee)
+                    fetch(`/api/employee/${employee._id}`, {
+                        method: 'DELETE'
                     })
                     .then(response => response.json())
                     .then(result => {
