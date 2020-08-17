@@ -24,10 +24,6 @@ router.get('/api/employees', (request, response) => {
 //DELETE route for deleting an employee
 router.delete('/api/employee/:id', (request, response) => {
     const requestId = request.params.id;
-    //Body parser is always making an request.body object
-    // if(!Object.keys(requestBody).length){
-    //     return response.status(400).send('Request body is missing');
-    // }
     Employee.findById(requestId)
             .then(employee => {
                 if(!employee){
